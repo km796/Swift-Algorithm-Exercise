@@ -67,3 +67,35 @@ struct Key: Hashable {
     let idx: Int
     let k: Int
 }
+
+
+class HappyNumber {
+    var set: Set<Int> = []
+    
+    func isHappy(_ n: Int) -> Bool {
+        if n == 1 {
+            return true
+        }
+        
+        let new_n = processN(n)
+        if set.contains(new_n) {
+            return false
+        }
+        set.insert(new_n)
+        return isHappy(new_n)
+    }
+    
+    func processN(_ n: Int) -> Int {
+        var res = 0
+        var num = n
+        while num >= 1 {
+            let mode = num%10
+            let whole: Int = num / 10
+            
+            res += Int(pow(Double(mode), Double(2)))
+            num = whole
+        }
+        
+        return res
+    }
+}
